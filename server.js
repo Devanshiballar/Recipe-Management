@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/",(req,res)=>{
-  res.send("<center><h1>Recipe management</h1><br>Get Recipe Api <a href=https://github.com/Devanshiballar/Recipe-Management.git target=_blank>Repository :Recipe-Management</a></center>")
+  res.send("<center><h1>Recipe Management Api</h1><br>Get Recipe Api <a href=https://github.com/Devanshiballar/Recipe-Management.git target=_blank>Repository :Recipe-Management</a></center>")
 })
 
 app.listen(PORT, () => {
