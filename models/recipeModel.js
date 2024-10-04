@@ -1,37 +1,35 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// Define the Recipe schema
-const recipeSchema = new mongoose.Schema(
-  {
-    recipe_image: {
-        type: String,
-        required: true, 
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    ingredients: {
-      type: [String], 
-      required: true,
-    },
-    instructions: {
-      type: String,
-      required: true,
-    },
-    cuisineType: {
-      type: String,
-      required: true,
-    },
-    // author: {
-    //   type: mongoose.Schema.Types.ObjectId, // Reference to the User model
-    //   ref: 'User',
-    //   required: true,
-    // },
+const recipeSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
-  }
-);
+  ingredients: {
+    type: [String],
+    required: true,
+  },
+  instructions: {
+    type: String,
+    required: true,
+  },
+  cuisineType: {
+    type: String,
+    required: true,
+  },
+  author: { 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User' 
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 module.exports = mongoose.model('Recipe', recipeSchema);

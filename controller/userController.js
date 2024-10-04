@@ -6,20 +6,17 @@ exports.signup = async (req, res) => {
   try {
     const { email, password, username } = req.body;
 
-    // Validate required fields
     if (!email || !password || !username) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are required" });
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ success: false, message: "Invalid email" });
     }
 
-    // Validate password length
     if (password.length < 6) {
       return res
         .status(400)
@@ -29,7 +26,6 @@ exports.signup = async (req, res) => {
         });
     }
 
-    // Check if email already exists
     const existingUserByEmail = await User.findOne({ email: email });
     if (existingUserByEmail) {
       return res
@@ -37,7 +33,6 @@ exports.signup = async (req, res) => {
         .json({ success: false, message: "Email already exists" });
     }
 
-    // Check if username already exists
     const existingUserByUsername = await User.findOne({ username: username });
     if (existingUserByUsername) {
       return res
@@ -49,18 +44,15 @@ exports.signup = async (req, res) => {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
-    // Create new user
     const newUser = new User({
       email,
       password: hashedPassword,
       username,
     });
 
-    // Save the user and generate a token
     await newUser.save();
     generateTokenAndSetCookie(newUser._id, res);
 
-    // Send response with new user info (excluding password)
     res.status(201).json({
       success: true,
       user: {
