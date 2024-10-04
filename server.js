@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Recipe management" });
 });
 
+app.get("/",(req,res)=>{
+  res.send("<center><h1>Recipe management</h1><br>Get Recipe Api <a href=https://github.com/Devanshiballar/Recipe-Management.git target=_blank>Repository :Recipe-Management</a></center>")
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
