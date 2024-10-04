@@ -23,6 +23,9 @@ app.use("/api/v1",userRoutes)
 app.use("/api/v1/",recipeRoutes);
 
 
+app.get("/", (req, res) => {
+  res.json({ message: "Recipe management" });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
