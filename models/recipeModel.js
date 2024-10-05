@@ -18,6 +18,10 @@ const recipeSchema = new Schema({
     type: String,
     required: true,
   },
+  recipe_image: {
+    type: String,
+    required: true, // This field is required
+  },
   author: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User' 
